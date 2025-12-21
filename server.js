@@ -12,8 +12,20 @@ app.use(express.static(__dirname + '/public'));
 // الدردشة
 io.on('connection', (socket) => {
   console.log('🔗 مستخدم متصل');
+
+  // 💬 الدردشة
   socket.on('chat message', (msg) => {
     io.emit('chat message', msg);
+  });
+
+  // 👥 الحضور
+  socket.on('attendance', (data) => {
+    io.emit('attendance', data);
+  });
+
+  // 📅 الحدث
+  socket.on('event change', (newEvent) => {
+    io.emit('event change', newEvent);
   });
 });
 
